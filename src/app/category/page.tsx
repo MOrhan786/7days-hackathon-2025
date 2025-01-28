@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/card";
 import { FuelIcon as GasPump, Car, Users2 } from "lucide-react";
 import { BsHeartFill } from "react-icons/bs";
-import { cars2 } from "@/constant/cars";
+import { cars1 } from "@/constant/cars";
 
 function CategorySection() {
 
@@ -25,7 +25,7 @@ function CategorySection() {
 
   // Function to show more cars
   const showMoreCars = () => {
-    setVisibleCars((prev) => prev + 3); // Show 6 more cars
+    setVisibleCars((prev) => prev + 6); // Show 6 more cars
     setShowLessEnabled(true); // Enable "Show Less" button
   };
 
@@ -52,7 +52,7 @@ function CategorySection() {
         <section className="popular w-full flex flex-col gap-4">
           <div className="sec grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Render only the visible cars */}
-            {cars2.slice(0, visibleCars).map((car) => (
+            {cars1.slice(0, visibleCars).map((car) => (
               <Card
                 key={car.id}
                 className="w-full max-w-[304px] mx-auto h-[388px] flex flex-col justify-between shadow-md transition-transform duration-300 hover:scale-105"
@@ -130,7 +130,7 @@ function CategorySection() {
           {/* Buttons Section */}
           <div className="flex justify-center mt-6 gap-4">
             {/* Show More Button */}
-            {visibleCars < cars2.length && (
+            {visibleCars < cars1.length && (
               <Button
                 onClick={showMoreCars}
                 className="bg-[#3563E9] hover:bg-[#3563E9]/90 text-white px-5 py-3 rounded"

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button } from "@/components/ui/button"
 import { BsHeart, BsHeartFill } from "react-icons/bs";
-import { cars, cars1 } from "@/constant/cars";
+import { cars1 } from "@/constant/cars";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { FuelIcon as GasPump, Car, Users2 } from 'lucide-react'
 import Image from "next/image";
@@ -26,7 +26,8 @@ function Cards() {
         
         {/* Cards Section */}
         <div className="sec  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 ">
-          {cars1.map(( car) => (
+          {/* {cars1.map(( car) => ( */}
+            {cars1.slice(0, 4).map(( car) => (
             <Card
              key={car.id }
             className="w-full max-w-[304px] mx-auto h-[388px] flex flex-col justify-between  shadow-md transition-transform duration-300 hover:scale-105 ">
@@ -109,7 +110,8 @@ function Cards() {
         
         {/* Cards Section */}
         <div className="sec  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 ">
-          {cars.map(( car) => (
+          {/* {cars.map(( car) => ( */}
+          {cars1.slice(4, 12).map(( car) => (
             <Card
              key={car.id }
             className="w-full max-w-[304px] mx-auto h-[388px] flex flex-col justify-between  shadow-md transition-transform duration-300 hover:scale-105">

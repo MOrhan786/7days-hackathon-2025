@@ -6,7 +6,8 @@ import Image from "next/image";
 import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import ProductCards from "./products/page";
+
+import ProductList from "@/components/productList";
 
 
 
@@ -89,7 +90,8 @@ export default function Home() {
           {/* api data fetch her cards */}
         {/* Section 4 - Ads with buttons */}
         <section id="block3" className="popular w-full flex flex-col gap-4">
-        <ProductCards/>
+        
+        <ProductList/>
       
       </section>
      

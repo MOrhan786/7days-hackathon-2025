@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { FuelIcon as GasPump, Car, Users2 } from 'lucide-react'
 import { BsHeart, BsHeartFill } from "react-icons/bs";
-import {  cars3, cars4 } from "@/constant/cars";
+import {  cars1 } from "@/constant/cars";
 
 import { Heart, Star } from "lucide-react";
 import PostCreator from "@/components/comments";
@@ -183,7 +183,8 @@ import PostCreator from "@/components/comments";
         
         {/* Cards Section */}
         <div className="sec  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
-          {cars3.map (( car) => (
+          {/* {cars1.map (( car) => ( */}
+          {cars1.slice(0, 3).map(( car) => (
             <Card
              key={car.id }
             className="w-full max-w-[304px] mx-auto h-[388px] flex flex-col justify-between  shadow-md transition-transform duration-300 hover:scale-105 ">
@@ -264,7 +265,8 @@ import PostCreator from "@/components/comments";
         
         {/* Cards Section */}
         <div className="sec  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
-          {cars4.map (( car) => (
+          {/* {cars1.map (( car) => ( */}
+          {cars1.slice(4, 7).map(( car) => (
             <Card
              key={car.id }
             className="w-full max-w-[304px] mx-auto h-[388px] flex flex-col justify-between  shadow-md transition-transform duration-300 hover:scale-105 ">
