@@ -3,6 +3,7 @@
 
 import * as React from "react"
 import { Moon, Sun, Home, Car, BarChart3, Wallet, MessageSquare, Calendar, Settings, HelpCircle, Briefcase, LogOut } from 'lucide-react'
+import Link from 'next/link'
 import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
@@ -56,7 +57,16 @@ export function SideBar() {
           </span>
           <nav className="space-y-8">
             <NavItem icon={<Settings size={24} />} label="Settings" />
-            <NavItem icon={<HelpCircle size={24} />} label="Help & Center" />
+              
+    <Link href="/contact-us" passHref>
+      <div className=" p-2  text-[#90A3BF] rounded-md flex items-center gap-2 mt-3  hover:bg-gray-100">
+        <HelpCircle size={24} />
+        Help & Center
+      </div>
+    </Link>
+
+            
+            {/* <NavItem icon={<HelpCircle size={24} />} label="Help & Center" /> */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 text-[#90A3BF]">
                 <Briefcase size={24} />

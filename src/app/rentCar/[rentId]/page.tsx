@@ -1,3 +1,4 @@
+// src\app\rentCar\[rentId]\page.tsx
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 // import { Input } from '@/components/ui/input';
 

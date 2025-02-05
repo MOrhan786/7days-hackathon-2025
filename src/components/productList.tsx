@@ -5,7 +5,9 @@ import { FuelIcon as GasPump, Users2, Car } from "lucide-react"
 import { Button } from "./ui/button"
 import { BsHeartFill } from "react-icons/bs"
 import Image from "next/image"
-import { Cars, fetchData } from "@/services/sanityApi"
+
+import Link from "next/link"
+import { Cars, fetchData } from "@/services/sanityApis"
 
 export default function ProductList() {
   const [products, setProducts] = useState<Cars[]>([])
@@ -98,9 +100,17 @@ export default function ProductList() {
                 <p className="text-[20px] font-bold text-[#1A202C] leading-none tracking-tight">
                   {cars.tags}
                 </p>
-                <Button className="bg-[#3563e9] p-2 text-white rounded-md ">
+                <Link     
+                    href={`/carDetail/proId?carId=${cars._id}&carImage=${cars.image}&carPricePerDay=${cars.pricePerDay}&carName=${cars.name}
+                     &carTransmission=${cars.transmission}&carType=${cars.type}&carFuel=${cars.fuelCapacity}&carCapacity=${cars.seatingCapacity}&carTags=${cars.tags}`}
+                  >
+                    <Button className="bg-[#3563e9] p-2 text-white rounded-md">
+                      Rent Now
+                    </Button>
+                  </Link>
+                {/* <Button className="bg-[#3563e9] p-2 text-white rounded-md ">
                   Rent Now
-                </Button>
+                </Button> */}
               </CardFooter>
             </Card>
           )

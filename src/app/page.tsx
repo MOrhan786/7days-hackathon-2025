@@ -11,9 +11,11 @@ import ProductList from "@/components/productList";
 
 
 
+
 export default function Home() {
-
-
+  // ye use effect hook  jo sanity pr user ka data add krta h khud 
+ 
+// ye use effect hook h jo user ko fetch krta h or user ko post krta h
   useEffect(() => {
     const sections = document.querySelectorAll(
       "#block1, #block2, #block3, #block4, #block5"

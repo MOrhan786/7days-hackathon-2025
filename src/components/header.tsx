@@ -1,6 +1,8 @@
 //  src\components\header.tsx
 import React from "react";
 import Image from "next/image";
+import { UserButton } from "@clerk/nextjs";
+
 
 
 export default function Header() {
@@ -39,13 +41,13 @@ export default function Header() {
       </div>
 
       {/* Profile Icons */}
-      <div className="flex items-center space-x-4 mt-4 md:mt-0">
-        <a href="#">
+      <div className="flex items-center space-x-4 mt-4 md:mt-0 ">
+        <a href="/wishlist">
           <Image src="/Like.png"
            alt="Like"
            width={36}
             height={36}
-            />
+           />
         </a>
         <a href="#">
           <Image
@@ -67,6 +69,7 @@ export default function Header() {
           
           />
         </a>
+        <UserButton/>
         <a href="#">
           <Image
             src="/profile.png"
@@ -75,8 +78,9 @@ export default function Header() {
             height={44}
             className=" rounded-full"
           />
-        </a>
-      </div>
+        </a> 
+       </div>
+      
     </div>
   );
 }

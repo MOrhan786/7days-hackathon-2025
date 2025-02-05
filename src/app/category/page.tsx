@@ -1,5 +1,6 @@
+// src\app\category\page.tsx
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PickUp from "@/components/pickUp";
 import SideNavbar from "@/components/sideNavbar";
 import { Button } from "@/components/ui/button";
@@ -16,8 +17,13 @@ import {
 import { FuelIcon as GasPump, Car, Users2 } from "lucide-react";
 import { BsHeartFill } from "react-icons/bs";
 import { cars1 } from "@/constant/cars";
+import clerkGetUser from "@/services/userApi";
+
 
 function CategorySection() {
+  useEffect(() => {
+    clerkGetUser();
+  }, []); // Fetch data here
 
   const initialVisibleCars = 9; // Number of cars initially visible
   const [visibleCars, setVisibleCars] = useState(initialVisibleCars); // State to track visible cars

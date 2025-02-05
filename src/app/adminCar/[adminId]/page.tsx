@@ -7,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import React from 'react'
 import Image from 'next/image';
 
+// import AdminComponent from '@/components/adminComponent';
+
 async function AdminCar(
   {searchParams}:{searchParams:
     Promise<{
@@ -29,7 +31,10 @@ async function AdminCar(
       <div className="hidden lg:block">
          <SideBar/>
       </div>
-
+       {/* admin component */}
+       <div className="">
+         {/* <AdminComponent/> */}
+      </div>
         {/* Main Content */}
           {/* map car div */}
         <div className=" flex-1 p-4 lg:p-8">
@@ -180,6 +185,7 @@ async function AdminCar(
           {/* car details  in one div two section*/}
           <div className="flex-1 p-4 lg:p-8 space-y-4">
            <CarStats/>
+          
         {/* Recent Transactions */}
         <div className="bg-white   p-4 lg:p-6  rounded-lg shadow-lg">
         
@@ -250,7 +256,7 @@ async function AdminCar(
    
     
 
-
+         
 
 
       </div>
