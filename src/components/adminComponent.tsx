@@ -2,6 +2,7 @@
 import  { useEffect } from 'react'
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
+
 function AdminComponent() {
     
       const {isLoaded,  user } = useUser();
@@ -10,7 +11,7 @@ function AdminComponent() {
         if (isLoaded) {
          const role =( user?.publicMetadata as { role?: string })?.role;
     
-          if (user || role !== 'admin') {
+          if (!user || role !== 'admin') {
            router.push('/')
           }
         }

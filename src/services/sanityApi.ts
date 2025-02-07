@@ -1,40 +1,51 @@
-// src\services\sanityApi.ts
-"use server"
+"use server";
 
-import { client } from "@/sanity/lib/client"
+import { client } from "@/sanity/lib/client";
 
-
-export interface ICard {
-  image: string;
-  colors: string;
-  productName: string;
+// Define Car Interface based on your schema
+export interface ICar {
+  [x: string]: any;
   _id: string;
-  category: string;
-  status: string;
-  description: string;
-  inventory: number;
-  price: number;
+  name: string;
+  brand: string;
+  type: string;
+  fuelCapacity: string;
+  transmission: string;
+  seatingCapacity: string;
+  pricePerDay: string;
+  originalPrice: string;
+  tags: string[];
+  image: string;
+  heartImage: string;
 }
 
-//-----------------------------------------------product Fetch Sanity
+//----------------------------------------------- Fetch Cars from Sanity
 export async function sanityFetch(query: string) {
-  const res: ICard[] =  await client.fetch(`${query}{
-          'image': image.asset->url,
-          colors,
-          productName,
-          _id,
-          category,
-          status,
-          description,
-          inventory,
-          price
-        }`)
+  try {
+    const query = `*[_type == "car"]{
+      _id,
+      name,
+      brand,
+      type,
+      fuelCapacity,
+      transmission,
+      seatingCapacity,
+      pricePerDay,
+      originalPrice,
+      tags,
+      "image": image.asset->url,
+      "heartImage": heartImage.asset->url
+    }`;
 
-  return res;
+    const res: ICar[] = await client.fetch(query);
+    return res;
+  } catch (error) {
+    console.error("Error fetching cars:", error);
+    throw error;
+  }
 }
 
-//-----------------------------------------------product-Image-Asset-Id
-
+//----------------------------------------------- Upload Image to Sanity
 async function uploadImageToSanity(imageUrl: string) {
   try {
     const response = await fetch(imageUrl);
@@ -42,7 +53,6 @@ async function uploadImageToSanity(imageUrl: string) {
     const blob = await response.blob();
 
     const asset = await client.assets.upload("image", blob);
- 
     return asset;
   } catch (error) {
     console.error("Image upload failed:", error);
@@ -50,94 +60,92 @@ async function uploadImageToSanity(imageUrl: string) {
   }
 }
 
-
-
-export interface IReturnSanityProduct {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: string;
-  _updatedAt: string;
-  category: string;
-  colors: string[],
-  description: string;
-  image: {
-    _type: string;
-    asset: {
-      _ref: string;
-      _type: 'reference'
-    }
-  },
-  inventory: number;
-  price: number;
-  productName: string
-  status: string;
-}
-
-
-//-----------------------------------------------product Update Sanity
-export async function productPostSanity(updatedProduct: ICard) {
-  
-  const imageAsset = await uploadImageToSanity(updatedProduct.image)
-  
-  const res = await client
-  .patch(updatedProduct._id)
-  .set({
-    image: {
-      _type: 'image',
-      asset: {
-        _type: 'reference',
-        _ref: imageAsset._id,
-      },
-    },
-    productName: updatedProduct.productName,
-    price: updatedProduct.price,
-    category: updatedProduct.category,
-    inventory: updatedProduct.inventory,
-    description: updatedProduct.description,
-  })
-  .commit();
-
-  return res
-  
-}
-
-
-
-//-----------------------------------------------product Delete Sanity
-export async function productDeleteSanity(updatedProduct: ICard) {
-    
-  const res = await client.delete(updatedProduct._id);
-
-  return res
-  
-}
-
-
-
-//-----------------------------------------------product Create Sanity
-export async function productCreateSanity(updatedProduct: ICard) {
+//----------------------------------------------- Create Car in Sanity
+export async function productCreateSanity(updatedProduct: ICar) {
   try {
+    const imageAsset = await uploadImageToSanity(updatedProduct.image);
+    const heartImageAsset = await uploadImageToSanity(updatedProduct.heartImage);
+
     const res = await client.create({
-      _type: "product",
-      productName: updatedProduct.productName,
-      price: updatedProduct.price,
-      category: updatedProduct.category,
-      inventory: updatedProduct.inventory,
-      description: updatedProduct.description,
-      status: "active",
-      colors: [],
+      _type: "car",
+      name: updatedProduct.name,
+      brand: updatedProduct.brand,
+      type: updatedProduct.type,
+      fuelCapacity: updatedProduct.fuelCapacity,
+      transmission: updatedProduct.transmission,
+      seatingCapacity: updatedProduct.seatingCapacity,
+      pricePerDay: updatedProduct.pricePerDay,
+      originalPrice: updatedProduct.originalPrice,
+      tags: updatedProduct.tags,
+      image: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: imageAsset._id,
+        },
+      },
+      heartImage: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: heartImageAsset._id,
+        },
+      },
     });
 
-    console.log("✅ Product created successfully:", res._id);
+    console.log("✅ Car created successfully:", res._id);
     return res;
   } catch (error) {
-    console.error("😡 Product creation failed:", error);
+    console.error("😡 Car creation failed:", error);
     throw error;
   }
 }
 
+//----------------------------------------------- Update Car in Sanity
+export async function productPostSanity(updatedProduct: ICar) {
+  try {
+    const imageAsset = await uploadImageToSanity(updatedProduct.image);
+  
 
+    const res = await client
+      .patch(updatedProduct._id)
+      .set({
+        name: updatedProduct.name,
+        brand: updatedProduct.brand,
+        type: updatedProduct.type,
+        fuelCapacity: updatedProduct.fuelCapacity,
+        transmission: updatedProduct.transmission,
+        seatingCapacity: updatedProduct.seatingCapacity,
+        pricePerDay: updatedProduct.pricePerDay,
+        originalPrice: updatedProduct.originalPrice,
+        tags: updatedProduct.tags,
+        image: {
+          _type: "image",
+          asset: {
+            _type: "reference",
+            _ref: imageAsset._id,
+          },
+        },
+       
+      })
+      .commit();
 
+    console.log("✅ Car updated successfully:", res._id);
+    return res;
+  } catch (error) {
+    console.error("😡 Car update failed:", error);
+    throw error;
+  }
+}
 
-
+//----------------------------------------------- Delete Car from Sanity
+export async function productDeleteSanity(carId: string) {
+  try {
+    const res = await client.delete(carId);
+    console.log("✅ Car deleted successfully:", res);
+    return res;
+  } catch (error) {
+    console.error("😡 Car deletion failed:", error);
+    throw error;
+  }
+}

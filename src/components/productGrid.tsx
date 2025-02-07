@@ -8,23 +8,21 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { EditProductDialog } from "./edit-product-dialog"
-// import { ICard, IReturnSanityProduct, productCreateSanity, productDeleteSanity, productPostSanity, sanityFetch } from "@/services/sanityApi"
-// import { userPostSanity } from "@/services/userId"
-import { ICard, productCreateSanity, productDeleteSanity, productPostSanity, sanityFetch } from "@/services/sanityApi"
-// import { userPostSanity } from "@/services/userId"
+
+import { ICar,  productCreateSanity, productDeleteSanity, productPostSanity, sanityFetch } from "@/services/sanityApi"
 import { CreateProductDialog } from "./create-product-dialog"
+import { EditProductDialog } from "./edit-product-dialog"
 
 
 
 
 export default function ProductsGrid() {
-  const [editingProduct, setEditingProduct] = useState<ICard | null>()
+  const [editingProduct, setEditingProduct] = useState<ICar | null>()
   
   const [isChange, setIsChange] = useState<boolean>(false)
   
   //-----------------------------------------------Edit-Card-function
-  const handleSaveProduct = async (updatedProduct: ICard) => {
+  const handleSaveProduct = async (updatedProduct: ICar) => {
     const res = await productPostSanity(updatedProduct)
    if(res){
     setIsChange(!isChange)
@@ -32,8 +30,8 @@ export default function ProductsGrid() {
   }
  
   //-----------------------------------------------Delete-Card-function
-  const handleDeleteProduct = async (updatedProduct: ICard) => {
-    const res = await productDeleteSanity(updatedProduct)
+  const handleDeleteProduct = async (updatedProduct: ICar) => {
+    const res = await productDeleteSanity(updatedProduct._id)
     if(res){
       setIsChange(!isChange)
      }
@@ -41,8 +39,8 @@ export default function ProductsGrid() {
   
   //-----------------------------------------------Create-Card-function
 
-  const [createProduct, setCreateProduct] = useState<ICard | null>()
-  const handleCreateProduct = async (updatedProduct: ICard) => {
+  const [createProduct, setCreateProduct] = useState<ICar | null>()
+  const handleCreateProduct = async (updatedProduct: ICar) => {
     try {
       const res = await productCreateSanity(updatedProduct);
       if (res) {
@@ -56,8 +54,8 @@ export default function ProductsGrid() {
 
     //----------------------------------------------- States
 
-  const [productArray, setProductsArray] = useState<ICard[]>([])
-  const [showProductArray, setShowProductArray] = useState<ICard[]>([])
+  const [productArray, setProductsArray] = useState<ICar[]>([])
+  const [showProductArray, setShowProductArray] = useState<ICar[]>([])
   const [search, setSearch] = useState<string>()
   const [categoryDropdown, setCategoryDropdown] = useState<string[]>([])
 
@@ -99,22 +97,28 @@ export default function ProductsGrid() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold">Products Grid ({productArray.length})</h1>
         <div className="flex items-center gap-4">
           <Button variant="outline">Export</Button>
           
           <Button onClick={(e) => {e.stopPropagation(); setCreateProduct({
+    
+
     _id: '',
-    productName: '',
-    price: 0,
-    inventory: 0,
-    category: '',
-    description: '',
+    name: '',
+    brand: '',
+    type: '',
+    fuelCapacity: '',
+    transmission: '',
+    seatingCapacity: '',
+    pricePerDay: '',
+    originalPrice: '',
+    tags:[],
     image: '',
-     colors: '',
-    status: ''
+    heartImage: '',
+    
   })}}>
             Create new
           </Button>
@@ -164,16 +168,17 @@ export default function ProductsGrid() {
               <div className="aspect-square relative">
                 <Image
                   src={product.image || "/placeholder.svg"}
-                  alt={product.productName}
+                  alt={product.name}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             </CardHeader>
             <CardContent className="p-4">
-              <CardTitle className="line-clamp-1">{product.productName}</CardTitle>
-              <p className="text-lg font-semibold">${product.price.toFixed(2)}</p>
-              <p className="text-sm text-muted-foreground mt-1">Stock: {product.inventory}</p>
+              <CardTitle className="line-clamp-1 text-[18px] font-sans font-semibold">{product.name}</CardTitle>
+              <p className="text-[16px]  text-black mt-1">{product.pricePerDay}</p>
+              
+              <p className="text-[15px]  text-black mt-1">FuelCapacity:{product.fuelCapacity}</p>
             </CardContent>
             <CardFooter className="border-t p-4">
               <div className="flex w-full gap-2">
@@ -225,3 +230,6 @@ export default function ProductsGrid() {
     </div>
   )
 }
+
+
+

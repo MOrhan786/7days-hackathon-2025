@@ -7,7 +7,7 @@ import { BsHeartFill } from "react-icons/bs"
 import Image from "next/image"
 
 import Link from "next/link"
-import { Cars, fetchData } from "@/services/sanityApis"
+import { Cars, fetchData, } from "@/services/sanityApis"
 
 export default function ProductList() {
   const [products, setProducts] = useState<Cars[]>([])

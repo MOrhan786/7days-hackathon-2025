@@ -14,41 +14,46 @@ interface Order {
   date: string;
   status: OrderStatus;
   total: number;
-  items: number;
+ 
+  carName:string
 }
 
 const mockOrders: Order[] = [
   {
-    id: "ORD-001",
+    id: "BOK-001",
     customer: "John Doe",
     date: "2024-03-15",
     status: "fulfilled",
     total: 149.99,
-    items: 3
+    
+    carName:"Sports"
   },
   {
-    id: "ORD-002",
+    id: "BOK-002",
     customer: "Jane Smith",
     date: "2024-03-14",
     status: "pending",
     total: 89.99,
-    items: 2
+   
+    carName:"Sedan"
   },
   {
-    id: "ORD-003",
+    id: "BOK-003",
     customer: "Mike Johnson",
     date: "2024-03-13",
     status: "cancelled",
     total: 199.99,
-    items: 5
+   
+    carName:"Electric"
   },
   {
-    id: "ORD-004",
+    id: "BOK-004",
     customer: "Sarah Wilson",
     date: "2024-03-12",
     status: "processing",
     total: 299.99,
-    items: 4
+   
+    carName:"SUV"
   },
 ];
 
@@ -73,7 +78,7 @@ export default function OrdersGrid() {
     <div className="space-y-6 p-4">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-          Orders ({mockOrders.length})
+        Bokings ({mockOrders.length})
         </h1>
         <div className="flex items-center gap-4">
           <Button variant="outline" className="gap-2">
@@ -123,7 +128,7 @@ export default function OrdersGrid() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg flex items-center gap-2">
                     <StatusIcon className="w-5 h-5" />
-                    <span>Order #{order.id}</span>
+                    <span>Bokings #{order.id}</span>
                   </CardTitle>
                   <Badge 
                     variant="outline"
@@ -156,7 +161,7 @@ export default function OrdersGrid() {
                 
                 <div className="flex items-center gap-3">
                   <Package className="w-4 h-4 text-muted-foreground" />
-                  <span>{order.items} item{order.items > 1 ? 's' : ''}</span>
+                  <span>{order.carName}</span>
                 </div>
               </CardContent>
 

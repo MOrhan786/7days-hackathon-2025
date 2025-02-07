@@ -17,13 +17,12 @@ import {
 import { FuelIcon as GasPump, Car, Users2 } from "lucide-react";
 import { BsHeartFill } from "react-icons/bs";
 import { cars1 } from "@/constant/cars";
-import clerkGetUser from "@/services/userApi";
+
+
 
 
 function CategorySection() {
-  useEffect(() => {
-    clerkGetUser();
-  }, []); // Fetch data here
+
 
   const initialVisibleCars = 9; // Number of cars initially visible
   const [visibleCars, setVisibleCars] = useState(initialVisibleCars); // State to track visible cars
@@ -156,6 +155,14 @@ function CategorySection() {
             )}
           </div>
         </section>
+
+        <div className="flex items-center justify-center">
+              <Link href={"/dashboard"}>
+                <Button className="bg-[#3563E9] hover:bg-blue-950 text-white  rounded ">
+                 Go to admin dashboard
+                </Button>
+              </Link>
+            </div>
       </div>
     </div>
   );

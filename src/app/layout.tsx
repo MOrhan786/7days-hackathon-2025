@@ -9,8 +9,6 @@ import FooterHandler from "@/components/FooterHandler";
 import { ClerkProvider } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import {  useEffect, useState } from "react";
-import { Toaster } from "@/components/ui/sonner";
-import Loading from "./loading";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,8 +35,6 @@ export default function RootLayout({
 }>) {
 
   const pathname = usePathname();
-
-
   const [isLoading, setIsLoading] = useState(true);
    
   useEffect(() => {
@@ -46,7 +42,6 @@ export default function RootLayout({
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-
     return () => clearTimeout(timer);
   }, [pathname]); //triggered when pathname changes
 
@@ -72,20 +67,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Toaster  richColors/>
         {/* <Script
           src="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js"
-          strategy="afterInteractive"/>
+          strategy="afterInteractive"/> */}
           
           <div hidden id="snipcart" data-api-key={process.env.
-            NEXT_PUBLIC_SNIPCART_API_KEY} data-config-modal-style="none"></div> */}
+            NEXT_PUBLIC_SNIPCART_API_KEY} data-config-modal-style="none"></div>
 
           {/* <Header/> */}
           {(studioAndHome && !isLoading) && <Header/>}
-        {isLoading ? <Loading /> : children}
-        {(studioAndHome && !isLoading) && <FooterHandler />}
-        {/* <FooterHandler /> */}
-
+                {children}
+          <FooterHandler/>
+           
       </body>
     </html>
     </ClerkProvider>

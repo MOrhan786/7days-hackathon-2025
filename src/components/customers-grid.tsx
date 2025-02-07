@@ -203,7 +203,7 @@ export default function CustomersGrid() {
               </div>
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-sm text-muted-foreground">Total Orders</p>
+                  <p className="text-sm text-muted-foreground">Total Bookings</p>
                   <p className="font-semibold">{customer.orders}</p>
                 </div>
                 <div>

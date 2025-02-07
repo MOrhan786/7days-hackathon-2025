@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button";
 
 import ProductList from "@/components/productList";
 
-
-
-
 export default function Home() {
+
+    
+
   // ye use effect hook  jo sanity pr user ka data add krta h khud 
  
 // ye use effect hook h jo user ko fetch krta h or user ko post krta h
@@ -42,13 +42,16 @@ export default function Home() {
   }, []);
   return (
  <>
+
   <div className="bg-[#f6f7f9] min-h-screen p-4 sm:p-6 lg:p-20 flex flex-col gap-10 font-[family-name:var(--font-geist-sans)]">
       {/* Section 1 - Ads with buttons */}
-
+      
       <section
+
         id="block1"
         className="w-full flex flex-wrap sm:flex-nowrap gap-4 sm:gap-8 justify-center items-center"
       >
+        
         <div className="relative flex flex-col items-center ">
           <Image
             src={"/Ads 1.png"}
@@ -118,7 +121,18 @@ export default function Home() {
               120 Car
             </div>
           </div>
+          {/* <div className="flex items-center justify-center mt-2">
+              <Link href={"/dashboard"}>
+                <Button className="bg-[#3563E9] hover:bg-blue-950 text-white  rounded ">
+                 Go to admin dashboard
+                </Button>
+              </Link>
+            </div> */}
+
+          
         </section>
+
+       
   </div>
  </>
   );

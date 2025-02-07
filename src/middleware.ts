@@ -1,20 +1,23 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
-// ye aik public route h jo kisi bhi user ko access krne ki ijazat deta h
-// ye tmam route bany  (,'/','/category', '/carDetail/proId','/rentCar/rentId','/adminCar/adminId')
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)' ,'/','/studio (.*)' ])
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default clerkMiddleware(async (auth, request) => {
-  if (!isPublicRoute(request)) {
-    await auth.protect()
+export function middleware(request: NextRequest) {
+  const isAuthenticated = request.cookies.get("isAuthenticated");
+  const isCategoryPage = request.nextUrl.pathname.startsWith("/dashboard"); // Category page check
+
+  // If user is NOT authenticated and trying to access category page, redirect to sign-in
+  if (!isAuthenticated && isCategoryPage) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
   }
-})
 
-export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
-  ],
+  // If user is authenticated and trying to access sign-in page, redirect to category
+  if (isAuthenticated && request.nextUrl.pathname === "/sign-in") {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  return NextResponse.next();
 }
 
+export const config = {
+  matcher: ["/category/:path*", "/sign-in"], // Middleware only affects category and sign-in pages
+};

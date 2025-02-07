@@ -1,21 +1,12 @@
 import Link from "next/link"
-// import {
-//   BarChart,
-//   Box,
-//   Globe,
-//   LayoutDashboard,
-//   MessageSquare,
-//   Package,
-//   Settings,
-//   ShoppingCart,
-//   Users,
-// } from "lucide-react"
 import {
   BarChart,
-
+  Box,
+  Globe,
+  LayoutDashboard,
   MessageSquare,
   Package,
- 
+  Settings,
   ShoppingCart,
   Users,
 } from "lucide-react"
@@ -27,17 +18,17 @@ const sidebarLinks = [
   {
     title: "Dashboard",
     icon: BarChart,
-    href: "/admin",
+    href: "/",
     variant: "ghost" as const,
   },
   {
-    title: "Products",
+    title: "Cars",
     icon: Package,
     href: "/product-data",
     variant: "ghost" as const,
   },
   {
-    title: "Orders",
+    title: "Bookings",
     icon: ShoppingCart,
     href: "/orders",
     variant: "ghost" as const,
@@ -74,4 +65,3 @@ export function AdminSidebar() {
     </aside>
   )
 }
-

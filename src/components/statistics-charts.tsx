@@ -4,8 +4,7 @@ import * as React from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-// import { ArrowUpRight, ArrowDownRight, ShoppingCart, DollarSign, Users, Package, Download } from "lucide-react"
-import { ArrowUpRight, ShoppingCart, DollarSign, Users, Package, Download } from "lucide-react"
+import { ArrowUpRight, Car, DollarSign, Users, Package, Download, CarFront } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
   Bar,
@@ -31,23 +30,23 @@ const monthlyRevenue = [
 ]
 
 const salesData = [
-  { category: "Electronics", thisMonth: 4000, lastMonth: 2400 },
-  { category: "Fashion", thisMonth: 3000, lastMonth: 1398 },
-  { category: "Home & Living", thisMonth: 2000, lastMonth: 9800 },
-  { category: "Beauty", thisMonth: 2780, lastMonth: 3908 },
+  { category: "Electric", thisMonth: 4000, lastMonth: 2400 },
+  { category: "Sports", thisMonth: 3000, lastMonth: 1398 },
+  { category: "SUV", thisMonth: 2000, lastMonth: 9800 },
+  { category: "Hacthback", thisMonth: 2780, lastMonth: 3908 },
 ]
 
 const topProducts = [
-  { id: 1, name: "Wireless Headphones", sales: 2400 },
-  { id: 2, name: "Smart Watch", sales: 1567 },
-  { id: 3, name: "LED Desk Lamp", sales: 980 },
-  { id: 4, name: "Bluetooth Speaker", sales: 3908 },
+  { id: 1, name: "Rolls Royce", sales: 2400 },
+  { id: 2, name: "Audi A6", sales: 1567 },
+  { id: 3, name: "Koenigsegg", sales: 980 },
+  { id: 4, name: "Ford Mustang", sales: 3908 },
 ]
 
 const customerDemographics = [
-  { location: "North America", customers: 4000 },
-  { location: "Europe", customers: 3000 },
-  { location: "Asia", customers: 2000 },
+  { location: "New York City", customers: 4000 },
+  { location: "Houston", customers: 3000 },
+  { location: "Los Angeles", customers: 2000 },
   { location: "Others", customers: 2780 },
 ]
 
@@ -100,11 +99,11 @@ export default function StatisticsCharts() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Orders</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Bookings</p>
                 <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">2,345</p>
               </div>
               <div className="p-3 bg-blue-100 rounded-full">
-                <ShoppingCart className="h-8 w-8 text-blue-600" />
+                <Car className="h-8 w-8 text-blue-600" />
               </div>
             </div>
             <div className="mt-4 flex items-center text-sm font-medium text-blue-600">
@@ -118,11 +117,11 @@ export default function StatisticsCharts() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Avg. Order Value</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Avg. Booking Value</p>
                 <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">$235.12</p>
               </div>
               <div className="p-3 bg-purple-100 rounded-full">
-                <Package className="h-8 w-8 text-purple-600" />
+                <CarFront  className="h-8 w-8 text-purple-600" />
               </div>
             </div>
             <div className="mt-4 flex items-center text-sm font-medium text-purple-600">
@@ -262,9 +261,9 @@ export default function StatisticsCharts() {
 
         <Card className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader>
-            <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">Top Products</CardTitle>
+            <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">Top Cars</CardTitle>
             <CardDescription className="text-gray-500 dark:text-gray-400">
-              Best-selling products by sales volume
+              Best-rent cars by sales volume
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -296,7 +295,7 @@ export default function StatisticsCharts() {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-200 dark:border-gray-700">
-                        <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Product</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Car</th>
                         <th className="text-right py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Sales</th>
                       </tr>
                     </thead>
